@@ -1542,12 +1542,23 @@ function stopCurrentAudio() {
 
 function playMP3(filename, onEnd) {
   stopCurrentAudio();
-  var audio = new Audio(AUDIO_PATH + filename);
+  var url = AUDIO_PATH + filename;
+  var audio = new Audio(url);
   audio.volume = 0.92;
   currentAudio = audio;
+  audio.addEventListener('canplay', function(){ console.log('MP3 playing: ' + filename); });
   audio.addEventListener('ended', function(){ currentAudio = null; if (onEnd) onEnd(); });
-  audio.addEventListener('error', function(){ currentAudio = null; if (onEnd) onEnd(); });
-  audio.play().catch(function(){ currentAudio = null; if (onEnd) onEnd(); });
+  audio.addEventListener('error', function(e){
+    console.error('Audio error for ' + filename + ':', e.target.error);
+    // Try fallback to Web Speech
+    currentAudio = null;
+    speakFallback(filename.replace(/\.mp3$/, '').replace(/_/g, ' '), onEnd);
+  });
+  audio.play().catch(function(e){
+    console.error('Play error for ' + filename + ':', e);
+    currentAudio = null;
+    if (onEnd) onEnd();
+  });
 }
 
 // ── Web Speech fallback ───────────────────────────────────
@@ -1596,6 +1607,8 @@ function stopSpeech() {
 // ── Guided script runner ──────────────────────────────────
 function runGuidedScript(segments) {
   guidedSegIdx = 0;
+  console.log('Starting guided script with ' + segments.length + ' segments');
+  console.log('First segment:', segments[0]);
   function nextSeg() {
     if (!timerRunning) return;
     if (guidedSegIdx >= segments.length) return;
@@ -1603,6 +1616,7 @@ function runGuidedScript(segments) {
     guidedSegIdx++;
     var el = document.getElementById('pl-phrase');
     if (el) el.textContent = seg.text;
+    console.log('Playing segment ' + guidedSegIdx + ': ' + (seg.filename || 'NO FILENAME') + ' - ' + seg.text);
     setTimeout(function() {
       speakSegment(seg, function() {
         if (!timerRunning) return;

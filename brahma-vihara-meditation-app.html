@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Vihāra — Brahma Vihara Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════════ */
+:root {
+  --bg:        #0D1410;
+  --bg2:       #111A14;
+  --surface:   #182218;
+  --surface2:  #1E2B1E;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.12);
+  --text:      #E8EFE6;
+  --text2:     #8FA88A;
+  --text3:     #4F6450;
+
+  --metta:     #4CAF80;
+  --metta-d:   #2D7A55;
+  --metta-glow:rgba(76,175,128,0.25);
+  --metta-bg:  rgba(76,175,128,0.08);
+
+  --karuna:    #E07070;
+  --karuna-d:  #A03040;
+  --karuna-glow:rgba(224,112,112,0.25);
+  --karuna-bg: rgba(224,112,112,0.08);
+
+  --mudita:    #E0B040;
+  --mudita-d:  #A07820;
+  --mudita-glow:rgba(224,176,64,0.25);
+  --mudita-bg: rgba(224,176,64,0.08);
+
+  --upekkha:   #6090E0;
+  --upekkha-d: #3050A0;
+  --upekkha-glow:rgba(96,144,224,0.25);
+  --upekkha-bg:rgba(96,144,224,0.08);
+
+  --gold:      #C8A84B;
+  --r:         12px;
+  --r-lg:      20px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Lato',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  max-width:480px;
+  margin:0 auto;
+  position:relative;
+}
+button{font-family:'Lato',sans-serif;cursor:pointer;border:none;background:none;}
+a{text-decoration:none;color:inherit;}
+input,textarea{font-family:'Lato',sans-serif;}
+
+/* ═══════════════════════════════════════════════════════
+   GLOBAL BACKGROUND ORBS (ambient)
+═══════════════════════════════════════════════════════ */
+.ambient{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  overflow:hidden;
+}
+.amb-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.12;
+  animation:amb-drift 20s ease-in-out infinite alternate;
+}
+.amb-1{width:300px;height:300px;background:var(--metta);top:-80px;left:-80px;animation-delay:0s;}
+.amb-2{width:250px;height:250px;background:var(--upekkha);bottom:20%;right:-60px;animation-delay:-7s;}
+.amb-3{width:180px;height:180px;background:var(--mudita);top:50%;left:30%;animation-delay:-13s;}
+@keyframes amb-drift{from{transform:translate(0,0) scale(1);}to{transform:translate(30px,20px) scale(1.1);}}
+
+/* ═══════════════════════════════════════════════════════
+   LAYER
+═══════════════════════════════════════════════════════ */
+#app{position:relative;z-index:1;}
+
+/* ═══════════════════════════════════════════════════════
+   ONBOARDING
+═══════════════════════════════════════════════════════ */
+#onboard{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:2rem 1.5rem 3rem;text-align:center;
+}
+.ob-logo{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;font-weight:300;letter-spacing:0.06em;
+  color:var(--text);margin-bottom:0.3rem;
+}
+.ob-logo span{color:var(--metta);}
+.ob-subtitle{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:3rem;}
+
+.ob-orb{
+  width:160px;height:160px;margin:0 auto 3rem;
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.ob-orb-ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(76,175,128,0.2);
+  animation:ob-ring-expand 3s ease-in-out infinite;
+}
+.ob-orb-ring:nth-child(2){animation-delay:1s;inset:-16px;border-color:rgba(76,175,128,0.12);}
+.ob-orb-ring:nth-child(3){animation-delay:2s;inset:-32px;border-color:rgba(76,175,128,0.06);}
+.ob-orb-core{
+  width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle, #4CAF80 0%, #2D7A55 60%, #1A4A30 100%);
+  box-shadow:0 0 40px var(--metta-glow);
+  animation:ob-breathe 4s ease-in-out infinite;
+}
+@keyframes ob-ring-expand{0%,100%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.05);opacity:1;}}
+@keyframes ob-breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+
+.ob-quote{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.05rem;line-height:1.8;color:var(--text2);
+  margin-bottom:0.75rem;max-width:340px;
+}
+.ob-attr{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:3.5rem;}
+
+.ob-4{display:flex;justify-content:center;gap:0.5rem;margin-bottom:3.5rem;}
+.ob-chip{
+  padding:6px 14px;border-radius:50px;font-size:0.72rem;
+  border:1px solid var(--border2);color:var(--text2);
+}
+
+.ob-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--metta);color:#0D1410;
+  border-radius:50px;padding:14px 40px;
+  font-size:0.9rem;font-weight:700;letter-spacing:0.06em;
+  transition:all 0.2s;box-shadow:0 8px 32px var(--metta-glow);
+}
+.ob-btn:hover{transform:translateY(-1px);box-shadow:0 12px 40px var(--metta-glow);}
+.ob-note{margin-top:1.25rem;font-size:0.68rem;color:var(--text3);letter-spacing:0.08em;}
+
+/* ═══════════════════════════════════════════════════════
+   MAIN SHELL
+═══════════════════════════════════════════════════════ */
+#main{display:none;}
+
+.top-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 1.25rem 0.9rem;
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,20,16,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.tb-logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:400;letter-spacing:0.04em;}
+.tb-logo span{color:var(--metta);}
+.tb-streak{
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface);border-radius:50px;padding:5px 12px 5px 8px;
+  font-size:0.75rem;color:var(--text2);
+}
+.streak-fire{font-size:0.9rem;}
+
+/* ═══════════════════════════════════════════════════════
+   BOTTOM NAV
+═══════════════════════════════════════════════════════ */
+.bnav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:480px;
+  display:flex;background:rgba(24,34,24,0.96);backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);z-index:200;
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.bn-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:10px 0 8px;color:var(--text3);transition:color 0.2s;
+}
+.bn-item.active{color:var(--metta);}
+.bn-ico{font-size:1.1rem;height:22px;display:flex;align-items:center;justify-content:center;}
+.bn-lbl{font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;}
+
+/* ═══════════════════════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════════════════════ */
+.screen{display:none;padding:1.25rem 1.25rem 90px;animation:screen-in 0.3s ease;}
+.screen.active{display:block;}
+@keyframes screen-in{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* ═══════════════════════════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════════════════════════ */
+.home-hero{
+  background:var(--surface);border-radius:var(--r-lg);
+  padding:1.5rem;margin-bottom:1.25rem;
+  position:relative;overflow:hidden;
+}
+.home-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 120% 100% at 85% 0%, rgba(76,175,128,0.15) 0%, transparent 65%);
+}
+.hh-inner{position:relative;}
+.hh-greeting{
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:6px;
+}
+.hh-title{
+  font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;
+  line-height:1.25;margin-bottom:0.5rem;
+}
+.hh-desc{font-size:0.82rem;color:var(--text2);line-height:1.6;margin-bottom:1.25rem;}
+.hh-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--metta);color:#0D1410;
+  border-radius:50px;padding:10px 24px;
+  font-size:0.82rem;font-weight:700;
+  transition:all 0.15s;
+}
+.hh-cta:hover{opacity:0.9;}
+
+.sec-label{
+  font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:0.9rem;margin-top:1.5rem;
+}
+
+/* Session cards — Insight Timer style */
+.session-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:0.5rem;}
+.sess-card{
+  display:flex;align-items:center;gap:14px;
+  background:var(--surface);border-radius:var(--r);
+  padding:1rem 1.1rem;cursor:pointer;
+  border:1px solid var(--border);
+  transition:all 0.15s;
+}
+.sess-card:hover{border-color:var(--border2);transform:translateY(-1px);}
+.sess-orb{
+  width:46px;height:46px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;position:relative;
+}
+.sess-orb-glow{
+  position:absolute;inset:-4px;border-radius:50%;opacity:0;
+  transition:opacity 0.2s;
+}
+.sess-card:hover .sess-orb-glow{opacity:1;}
+.sess-info{flex:1;}
+.sess-vihara{
+  font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;
+  margin-bottom:2px;
+}
+.sess-desc{font-size:0.72rem;color:var(--text2);line-height:1.4;}
+.sess-meta{display:flex;align-items:center;gap:6px;margin-top:5px;}
+.sess-dur{
+  font-size:0.65rem;color:var(--text3);
+  background:var(--surface2);padding:2px 8px;border-radius:20px;
+}
+.sess-play{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:0.7rem;
+  border:1px solid var(--border2);color:var(--text2);
+  transition:all 0.15s;
+}
+.sess-card:hover .sess-play{background:var(--metta);color:#0D1410;border-color:var(--metta);}
+
+/* Full program card */
+.prog-card{
+  background:var(--surface);border-radius:var(--r-lg);
+  padding:1.25rem;border:1px solid var(--border);
+  margin-bottom:0.5rem;cursor:pointer;
+  transition:all 0.15s;
+}
+.prog-card:hover{border-color:var(--border2);}
+.pc-top{display:flex;align-items:center;gap:12px;margin-bottom:0.75rem;}
+.pc-icon{
+  width:42px;height:42px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  background:rgba(76,175,128,0.12);
+}
+.pc-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;}
+.pc-sub{font-size:0.72rem;color:var(--text2);}
+.pc-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.pc-pill{
+  font-size:0.65rem;padding:3px 10px;border-radius:20px;
+  background:var(--surface2);color:var(--text2);
+}
+
+/* ═══════════════════════════════════════════════════════
+   PLAYER SCREEN (Calm-inspired immersive)
+═══════════════════════════════════════════════════════ */
+#player-screen{
+  position:fixed;inset:0;z-index:500;
+  display:none;flex-direction:column;
+  padding:0;
+}
+#player-screen.open{display:flex;animation:player-rise 0.4s cubic-bezier(0.16,1,0.3,1);}
+@keyframes player-rise{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:none;}}
+
+.player-bg{
+  position:absolute;inset:0;z-index:0;
+  transition:background 1s ease;
+}
+.player-noise{
+  position:absolute;inset:0;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:0.4;pointer-events:none;
+}
+
+.player-inner{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;padding:env(safe-area-inset-top,20px) 1.5rem 0;}
+
+/* Player top */
+.player-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 0 0.5rem;
+}
+.player-close{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--text2);
+  transition:background 0.15s;
+}
+.player-close:hover{background:rgba(255,255,255,0.15);}
+.player-session-name{
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text2);
+}
+.player-step-indicator{
+  font-size:0.72rem;color:var(--text3);
+  background:rgba(255,255,255,0.06);
+  padding:4px 12px;border-radius:20px;
+}
+
+/* Breathing orb */
+.player-orb-wrap{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1rem 0;
+}
+.orb-outer{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  margin-bottom:2rem;
+}
+.orb-ring-1,.orb-ring-2,.orb-ring-3{
+  position:absolute;border-radius:50%;border:1px solid;
+  opacity:0;animation:ring-pulse 4s ease-in-out infinite;
+}
+.orb-ring-1{width:180px;height:180px;animation-delay:0s;}
+.orb-ring-2{width:220px;height:220px;animation-delay:1.3s;}
+.orb-ring-3{width:260px;height:260px;animation-delay:2.6s;}
+@keyframes ring-pulse{0%{opacity:0;transform:scale(0.92);}40%{opacity:0.4;}100%{opacity:0;transform:scale(1.06);}}
+
+.orb-core{
+  width:140px;height:140px;border-radius:50%;
+  position:relative;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:box-shadow 1s ease;
+}
+.orb-core-inner{
+  position:absolute;inset:0;border-radius:50%;
+  transition:background 1s ease, box-shadow 1s ease;
+}
+.orb-symbol{
+  font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:300;
+  color:rgba(255,255,255,0.9);position:relative;z-index:1;
+  text-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.orb-breathing{
+  position:absolute;inset:-8px;border-radius:50%;
+  border:2px solid rgba(255,255,255,0.15);
+}
+
+/* Player state styles */
+.state-inhale .orb-core-inner{animation:orb-inhale 4s ease-in-out forwards;}
+.state-exhale .orb-core-inner{animation:orb-exhale 6s ease-in-out forwards;}
+.state-playing .orb-core-inner{animation:orb-meditate 4s ease-in-out infinite;}
+@keyframes orb-inhale{0%{transform:scale(1);}100%{transform:scale(1.15);}}
+@keyframes orb-exhale{0%{transform:scale(1.15);}100%{transform:scale(0.95);}}
+@keyframes orb-meditate{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
+
+/* Breath guide */
+.breath-guide{
+  text-align:center;margin-bottom:1rem;min-height:32px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.bg-action{
+  font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;
+  color:rgba(255,255,255,0.8);letter-spacing:0.04em;
+}
+.bg-sub{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+
+/* Phase phrase */
+.player-phrase{
+  background:rgba(0,0,0,0.25);border-radius:var(--r);
+  padding:1rem 1.25rem;margin-bottom:1rem;
+  backdrop-filter:blur(8px);max-height:130px;overflow-y:auto;
+  border:1px solid rgba(255,255,255,0.06);
+  scrollbar-width:none;
+}
+.player-phrase::-webkit-scrollbar{display:none;}
+.pp-text{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:0.95rem;line-height:2;color:rgba(255,255,255,0.75);
+  transition:opacity 0.5s;
+}
+
+/* Timer ring */
+.player-timer{
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  margin-bottom:1.25rem;
+}
+.ptimer-ring{position:relative;width:88px;height:88px;}
+.ptimer-ring svg{transform:rotate(-90deg);}
+.ptimer-track{fill:none;stroke:rgba(255,255,255,0.08);stroke-width:3;}
+.ptimer-prog{fill:none;stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset 1s linear,stroke 1s ease;}
+.ptimer-center{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.ptimer-time{font-size:1rem;font-weight:300;letter-spacing:0.02em;}
+.ptimer-lbl{font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+
+/* Progress steps */
+.player-steps{
+  display:flex;gap:6px;justify-content:center;margin-bottom:1rem;
+}
+.ps-dot{
+  height:3px;flex:1;border-radius:2px;
+  background:rgba(255,255,255,0.12);transition:background 0.5s;
+  max-width:60px;
+}
+.ps-dot.done{background:rgba(255,255,255,0.4);}
+.ps-dot.current{background:var(--metta);}
+
+/* Player controls */
+.player-controls{
+  display:flex;align-items:center;justify-content:center;gap:1.5rem;
+  padding:0 0 calc(env(safe-area-inset-bottom,0px) + 1.5rem);
+}
+.pc-prev,.pc-next{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.07);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--text2);transition:all 0.15s;
+}
+.pc-prev:hover,.pc-next:hover{background:rgba(255,255,255,0.14);}
+.pc-main{
+  width:70px;height:70px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+  transition:all 0.2s;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+.pc-main:hover{transform:scale(1.05);}
+.pc-phase-label{
+  text-align:center;margin-bottom:0.5rem;
+  font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);
+}
+
+/* ═══════════════════════════════════════════════════════
+   EXPLORE SCREEN
+═══════════════════════════════════════════════════════ */
+.v-tabs{
+  display:flex;background:var(--surface);border-radius:50px;padding:3px;
+  margin-bottom:1.25rem;border:1px solid var(--border);
+}
+.v-tab{
+  flex:1;text-align:center;padding:8px 4px;border-radius:50px;
+  font-size:0.72rem;letter-spacing:0.04em;font-weight:700;
+  color:var(--text3);transition:all 0.2s;
+}
+.v-tab.active{color:var(--text);}
+
+.v-panel{display:none;animation:screen-in 0.25s ease;}
+.v-panel.active{display:block;}
+
+.v-hero{border-radius:var(--r-lg);padding:1.5rem 1.5rem 1.25rem;margin-bottom:1rem;position:relative;overflow:hidden;}
+.v-hero-glow{position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;filter:blur(60px);opacity:0.3;}
+.vh-pali{
+  font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:300;
+  margin-bottom:3px;position:relative;
+}
+.vh-eng{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1rem;opacity:0.6;}
+.vh-desc{font-family:'Playfair Display',serif;font-style:italic;font-size:0.95rem;line-height:1.8;opacity:0.85;}
+
+.enemy-strip{display:flex;gap:8px;margin-bottom:1rem;}
+.e-badge{
+  flex:1;padding:0.7rem;border-radius:var(--r);
+  background:var(--surface);border:1px solid var(--border);
+}
+.e-type{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.e-val{font-size:0.78rem;color:var(--text2);line-height:1.4;}
+
+.detail-sec{margin-bottom:1.25rem;}
+.ds-head{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.75rem;}
+.phrase-block{
+  border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:8px;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.phrase-block p{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:0.95rem;line-height:2.1;
+}
+.ne-explain{
+  background:var(--surface);border-radius:var(--r);
+  padding:1rem;border:1px solid var(--border);
+  margin-bottom:1rem;
+}
+.ne-e-title{font-size:0.82rem;font-weight:700;margin-bottom:6px;}
+.ne-e-body{font-size:0.8rem;color:var(--text2);line-height:1.7;}
+.antidote-row{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface2);border-radius:var(--r);
+  padding:0.85rem 1rem;margin-top:8px;
+  border:1px solid var(--border2);
+}
+.ant-arrow{font-size:1rem;margin-top:1px;flex-shrink:0;}
+.ant-text{font-size:0.8rem;color:var(--text2);line-height:1.6;}
+.ant-text strong{color:var(--text);font-weight:700;}
+
+.bq-box{
+  background:rgba(0,0,0,0.3);border-radius:var(--r);
+  padding:1rem 1.1rem;border-left:2px solid var(--metta);
+  margin-bottom:1rem;
+}
+.bq-text{font-family:'Playfair Display',serif;font-style:italic;font-size:0.9rem;color:var(--text2);line-height:1.75;margin-bottom:6px;}
+.bq-attr{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);}
+
+.vid-link{
+  display:flex;align-items:center;gap:12px;
+  background:var(--surface);border-radius:var(--r);
+  padding:0.85rem 1rem;border:1px solid var(--border);
+  margin-bottom:8px;transition:border-color 0.15s;
+}
+.vid-link:hover{border-color:var(--border2);}
+.vl-thumb{
+  width:38px;height:38px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.vl-play{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid rgba(255,255,255,0.85);margin-left:2px;}
+.vl-info{flex:1;}
+.vl-title{font-size:0.8rem;font-weight:700;color:var(--text);}
+.vl-meta{font-size:0.68rem;color:var(--text3);margin-top:2px;}
+
+/* ═══════════════════════════════════════════════════════
+   NEAR ENEMIES SCREEN
+═══════════════════════════════════════════════════════ */
+.ne-cycle{
+  background:var(--surface);border-radius:var(--r-lg);
+  padding:1.25rem;border:1px solid var(--border);
+  margin-bottom:1.25rem;
+}
+.nec-title{
+  font-family:'Playfair Display',serif;font-size:1rem;
+  color:var(--text2);margin-bottom:1rem;text-align:center;
+}
+.nec-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.nec-cell{
+  background:rgba(0,0,0,0.2);border-radius:var(--r);
+  padding:0.75rem;border:1px solid var(--border);
+}
+.nec-from{font-size:0.62rem;color:var(--text3);letter-spacing:0.06em;margin-bottom:4px;}
+.nec-to{font-size:0.75rem;color:var(--text2);line-height:1.5;}
+.nec-arr{font-size:0.62rem;color:var(--text3);margin-top:5px;}
+
+.ne-acc{margin-bottom:10px;}
+.ne-acc-header{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border-radius:var(--r);
+  padding:1rem 1.1rem;cursor:pointer;
+  border:1px solid var(--border);transition:border-color 0.15s;
+}
+.ne-acc-header:hover{border-color:var(--border2);}
+.ne-acc-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.ne-acc-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;flex:1;}
+.ne-acc-tag{font-size:0.65rem;padding:2px 9px;border-radius:20px;opacity:0.8;}
+.ne-acc-chev{font-size:0.72rem;color:var(--text3);transition:transform 0.2s;}
+.ne-acc-chev.open{transform:rotate(180deg);}
+.ne-acc-body{
+  display:none;background:var(--surface);
+  border:1px solid var(--border);border-top:none;
+  border-radius:0 0 var(--r) var(--r);
+  padding:0 1.1rem 1.1rem;
+}
+.ne-acc-body.open{display:block;animation:screen-in 0.2s ease;}
+.ne-row-lbl{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-top:0.85rem;margin-bottom:4px;}
+.ne-row-text{font-size:0.8rem;color:var(--text2);line-height:1.7;}
+.ne-pill-sm{display:inline-block;font-size:0.68rem;padding:2px 9px;border-radius:12px;margin-top:4px;font-style:italic;}
+
+/* ═══════════════════════════════════════════════════════
+   JOURNAL SCREEN
+═══════════════════════════════════════════════════════ */
+.streak-card{
+  background:var(--surface);border-radius:var(--r-lg);
+  padding:1.25rem 1.5rem;margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:1.25rem;
+  border:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.streak-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 90% 50%, rgba(76,175,128,0.1), transparent);
+}
+.sc-inner{position:relative;}
+.sc-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:300;line-height:1;color:var(--metta);}
+.sc-lbl{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);}
+.sc-wk{display:flex;gap:6px;margin-left:auto;position:relative;}
+.sc-day{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.sc-dlbl{font-size:0.58rem;color:var(--text3);}
+.sc-dpip{width:8px;height:8px;border-radius:50%;background:var(--surface2);}
+.sc-dpip.on{background:var(--metta);}
+
+.today-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem;}
+.tt{
+  background:var(--surface);border-radius:var(--r);
+  padding:1rem;border:1.5px solid var(--border);
+  cursor:pointer;text-align:center;transition:all 0.15s;
+}
+.tt:active{transform:scale(0.96);}
+.tt-ck{font-size:1.4rem;height:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
+.tt-pali{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:2px;}
+.tt-eng{font-size:0.65rem;color:var(--text3);}
+
+.reflect-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;}
+.rc{
+  background:var(--surface);border-radius:var(--r);
+  padding:1rem;border:1px solid var(--border);
+}
+.rc-q{font-size:0.8rem;font-weight:700;margin-bottom:8px;}
+.rc-ta{
+  width:100%;border:none;background:rgba(0,0,0,0.2);
+  border-radius:8px;padding:10px 12px;
+  font-size:0.8rem;color:var(--text);resize:none;
+  min-height:68px;line-height:1.6;outline:none;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.rc-ta::placeholder{color:var(--text3);}
+.save-refl{
+  width:100%;padding:13px;border-radius:var(--r);
+  background:var(--metta);color:#0D1410;font-weight:700;
+  font-size:0.88rem;letter-spacing:0.04em;
+  transition:all 0.2s;
+  box-shadow:0 4px 20px var(--metta-glow);
+}
+.save-refl:hover{opacity:0.9;transform:translateY(-1px);}
+
+.closing{
+  text-align:center;padding:1.5rem 0.5rem;
+  border-top:1px solid var(--border);margin-top:0.5rem;
+}
+.cl-text{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:0.9rem;color:var(--text2);line-height:2.2;margin-bottom:0.5rem;
+}
+.cl-attr{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);}
+
+/* ═══════════════════════════════════════════════════════
+   UTILS
+═══════════════════════════════════════════════════════ */
+.toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%);
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:50px;padding:10px 24px;font-size:0.82rem;
+  opacity:0;transition:opacity 0.3s;z-index:9999;
+  white-space:nowrap;
+}
+.toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="ambient">
+  <div class="amb-orb amb-1"></div>
+  <div class="amb-orb amb-2"></div>
+  <div class="amb-orb amb-3"></div>
+</div>
+
+<div id="app">
+
+<!-- ══════════════════════════════════
+     ONBOARDING
+══════════════════════════════════ -->
+<div id="onboard">
+  <div class="ob-logo">Vihā<span>ra</span></div>
+  <div class="ob-subtitle">Brahma Vihara · Bhavana Society</div>
+
+  <div class="ob-orb">
+    <div class="ob-orb-ring"></div>
+    <div class="ob-orb-ring"></div>
+    <div class="ob-orb-ring"></div>
+    <div class="ob-orb-core"></div>
+  </div>
+
+  <div class="ob-quote">"These states should become the mind's constant dwelling-places — not merely places of rare visits."</div>
+  <div class="ob-attr">Bhante Gunaratana · Bhavana Society</div>
+
+  <div class="ob-4">
+    <div class="ob-chip" style="border-color:rgba(76,175,128,0.4);color:#4CAF80;">Mettā</div>
+    <div class="ob-chip" style="border-color:rgba(224,112,112,0.4);color:#E07070;">Karuṇā</div>
+    <div class="ob-chip" style="border-color:rgba(224,176,64,0.4);color:#E0B040;">Muditā</div>
+    <div class="ob-chip" style="border-color:rgba(96,144,224,0.4);color:#6090E0;">Upekkhā</div>
+  </div>
+
+  <button class="ob-btn" onclick="enterApp()">Begin Practice</button>
+  <div class="ob-note">FREE · NO SIGNUP · BHAVANA SOCIETY TRADITION</div>
+</div>
+
+<!-- ══════════════════════════════════
+     MAIN
+══════════════════════════════════ -->
+<div id="main">
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="tb-logo">Vihā<span>ra</span></div>
+    <div class="tb-streak">
+      <span class="streak-fire">🔥</span>
+      <span id="streak-disp">0 days</span>
+    </div>
+  </div>
+
+  <!-- ── HOME ── -->
+  <div id="s-home" class="screen active">
+    <div class="home-hero">
+      <div class="hh-inner">
+        <div class="hh-greeting" id="hh-greet">GOOD MORNING</div>
+        <div class="hh-title" id="hh-title">Today's abode:<br><span id="hh-vihara" style="color:var(--metta)">Mettā</span></div>
+        <div class="hh-desc" id="hh-desc">Loving-friendliness — the foundation of all four divine abodes. Begin here.</div>
+        <button class="hh-cta" onclick="openPlayer('full')">▶ &nbsp;Start 30-min session</button>
+      </div>
+    </div>
+
+    <div class="sec-label">Quick sessions</div>
+    <div class="session-cards">
+      <div class="sess-card" onclick="openPlayer('metta')">
+        <div class="sess-orb" style="background:var(--metta-bg);">
+          <div class="sess-orb-glow" style="background:radial-gradient(circle,var(--metta-glow),transparent);"></div>
+          <span style="color:var(--metta);">💚</span>
+        </div>
+        <div class="sess-info">
+          <div class="sess-vihara" style="color:var(--metta);">Mettā</div>
+          <div class="sess-desc">Loving-friendliness · Boundless goodwill</div>
+          <div class="sess-meta">
+            <div class="sess-dur">8 min</div>
+            <div class="sess-dur">Self → All beings</div>
+          </div>
+        </div>
+        <div class="sess-play">▶</div>
+      </div>
+      <div class="sess-card" onclick="openPlayer('karuna')">
+        <div class="sess-orb" style="background:var(--karuna-bg);">
+          <div class="sess-orb-glow" style="background:radial-gradient(circle,var(--karuna-glow),transparent);"></div>
+          <span style="color:var(--karuna);">❤️</span>
+        </div>
+        <div class="sess-info">
+          <div class="sess-vihara" style="color:var(--karuna);">Karuṇā</div>
+          <div class="sess-desc">Compassion · Mettā meeting suffering</div>
+          <div class="sess-meta">
+            <div class="sess-dur">6 min</div>
+            <div class="sess-dur">River bank method</div>
+          </div>
+        </div>
+        <div class="sess-play">▶</div>
+      </div>
+      <div class="sess-card" onclick="openPlayer('mudita')">
+        <div class="sess-orb" style="background:var(--mudita-bg);">
+          <div class="sess-orb-glow" style="background:radial-gradient(circle,var(--mudita-glow),transparent);"></div>
+          <span style="color:var(--mudita);">🌟</span>
+        </div>
+        <div class="sess-info">
+          <div class="sess-vihara" style="color:var(--mudita);">Muditā</div>
+          <div class="sess-desc">Sympathetic joy · Delight without envy</div>
+          <div class="sess-meta">
+            <div class="sess-dur">6 min</div>
+            <div class="sess-dur">Joy without comparison</div>
+          </div>
+        </div>
+        <div class="sess-play">▶</div>
+      </div>
+      <div class="sess-card" onclick="openPlayer('upekkha')">
+        <div class="sess-orb" style="background:var(--upekkha-bg);">
+          <div class="sess-orb-glow" style="background:radial-gradient(circle,var(--upekkha-glow),transparent);"></div>
+          <span style="color:var(--upekkha);">🔵</span>
+        </div>
+        <div class="sess-info">
+          <div class="sess-vihara" style="color:var(--upekkha);">Upekkhā</div>
+          <div class="sess-desc">Equanimity · The balancing crown</div>
+          <div class="sess-meta">
+            <div class="sess-dur">6 min</div>
+            <div class="sess-dur">Open, steady presence</div>
+          </div>
+        </div>
+        <div class="sess-play">▶</div>
+      </div>
+    </div>
+
+    <div class="sec-label">Full program</div>
+    <div class="prog-card" onclick="openPlayer('full')">
+      <div class="pc-top">
+        <div class="pc-icon">🧘</div>
+        <div>
+          <div class="pc-title">Complete Brahma Vihāra Session</div>
+          <div class="pc-sub">All four abodes · Bhavana Society tradition</div>
+        </div>
+      </div>
+      <div class="pc-pills">
+        <div class="pc-pill">30 minutes</div>
+        <div class="pc-pill">6 phases</div>
+        <div class="pc-pill">Breathing guide</div>
+        <div class="pc-pill">Bhante G phrases</div>
+      </div>
+    </div>
+
+    <div class="closing" style="margin-top:1.5rem;">
+      <div class="cl-text">May all beings be happy and secure.<br>May all beings have happy minds.</div>
+      <div class="cl-attr">Bhavana Society Closing Verse</div>
+    </div>
+  </div>
+
+  <!-- ── EXPLORE ── -->
+  <div id="s-explore" class="screen">
+    <div class="v-tabs" id="vtabs">
+      <button class="v-tab active" onclick="switchV('metta',this)" style="color:var(--metta);">Mettā</button>
+      <button class="v-tab" onclick="switchV('karuna',this)">Karuṇā</button>
+      <button class="v-tab" onclick="switchV('mudita',this)">Muditā</button>
+      <button class="v-tab" onclick="switchV('upekkha',this)">Upekkhā</button>
+    </div>
+
+    <!-- METTA panel -->
+    <div class="v-panel active" id="vp-metta">
+      <div class="v-hero" style="background:var(--metta-bg);">
+        <div class="v-hero-glow" style="background:var(--metta);"></div>
+        <div class="vh-pali" style="color:var(--metta);">Mettā</div>
+        <div class="vh-eng" style="color:var(--metta-d);">Loving-friendliness</div>
+        <div class="vh-desc">The foundation of all four abodes. An unconditional warmth for all beings — neither possessive attachment nor indifference, but the open wish: may you be well.</div>
+      </div>
+      <div class="enemy-strip">
+        <div class="e-badge"><div class="e-type">Near enemy</div><div class="e-val">Possessive attachment — caring with conditions</div></div>
+        <div class="e-badge"><div class="e-type">Far enemy</div><div class="e-val">Hatred or ill-will</div></div>
+      </div>
+      <div class="detail-sec">
+        <div class="ds-head">Traditional phrases · Bhante G</div>
+        <div class="phrase-block" style="background:var(--metta-bg);border-color:rgba(76,175,128,0.1);">
+          <p style="color:rgba(76,175,128,0.9);">May I be gentle. May I be relaxed. May I be happy and peaceful.<br>May I be healthy. May my heart become soft.<br>May my words be pleasing. May my actions be kind.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--metta-bg);border-color:rgba(76,175,128,0.1);">
+          <p style="color:rgba(76,175,128,0.9);">May all beings be well, happy, and peaceful.<br>May no harm come to them. May no difficulties come to them.<br>May they have patience, courage, understanding, and determination<br>to meet and overcome inevitable difficulties in life.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--metta-bg);border-color:rgba(76,175,128,0.1);">
+          <p style="color:rgba(76,175,128,0.9);">May all beings in all ten directions be well, happy, and peaceful.<br>May all beings everywhere be filled with loving-friendliness —<br>abundant, exalted, and measureless.</p>
+        </div>
+      </div>
+      <div class="ne-explain">
+        <div class="ne-e-title" style="color:var(--metta);">Working with the near enemy</div>
+        <div class="ne-e-body">Pure mettā has no agenda. The moment you feel hurt when someone chooses differently — you've slipped into attachment. The sign: you are more attached to the outcome than to their freedom.</div>
+        <div class="antidote-row">
+          <div class="ant-arrow" style="color:var(--karuna);">→</div>
+          <div class="ant-text"><strong>Antidote: bring in karuṇā.</strong> Acknowledge their independent path and karma. Compassion restores warmth without grip.</div>
+        </div>
+      </div>
+      <div class="bq-box" style="border-left-color:var(--metta);">
+        <div class="bq-text">"Metta is simply wishing well for others — a quality of caring about beings and their wellness. Rather than seeking to define it perfectly, we should seek to know and understand it experientially."</div>
+        <div class="bq-attr">Bhante Gunaratana · Bhavana Society</div>
+      </div>
+      <div class="detail-sec">
+        <div class="ds-head">Bhante G on YouTube</div>
+        <a class="vid-link" href="https://www.youtube.com/watch?v=4hk9NS72WdA" target="_blank">
+          <div class="vl-thumb" style="background:var(--metta-d);"><div class="vl-play"></div></div>
+          <div class="vl-info"><div class="vl-title">Metta Retreat — Guided Meditation &amp; Talk</div><div class="vl-meta">Bhante G · Bhavana Society</div></div>
+        </a>
+        <a class="vid-link" href="https://www.youtube.com/watch?v=4Ba-jBbd718" target="_blank">
+          <div class="vl-thumb" style="background:var(--metta-d);"><div class="vl-play"></div></div>
+          <div class="vl-info"><div class="vl-title">Guided Meditation &amp; Dhamma Talk</div><div class="vl-meta">Bhavana Society · Nov 2024</div></div>
+        </a>
+      </div>
+      <button class="hh-cta" style="width:100%;justify-content:center;border-radius:var(--r);" onclick="openPlayer('metta')">▶ &nbsp;Begin Mettā session</button>
+    </div>
+
+    <!-- KARUNA panel -->
+    <div class="v-panel" id="vp-karuna">
+      <div class="v-hero" style="background:var(--karuna-bg);">
+        <div class="v-hero-glow" style="background:var(--karuna);"></div>
+        <div class="vh-pali" style="color:var(--karuna);">Karuṇā</div>
+        <div class="vh-eng" style="color:var(--karuna-d);">Compassion</div>
+        <div class="vh-desc">Mettā meeting suffering. The steady wish for beings to be free from pain — one hand reaching toward those in the current, the other anchored to the tree.</div>
+      </div>
+      <div class="enemy-strip">
+        <div class="e-badge"><div class="e-type">Near enemy</div><div class="e-val">Grief or pity — collapsing into suffering</div></div>
+        <div class="e-badge"><div class="e-type">Far enemy</div><div class="e-val">Cruelty or indifference to pain</div></div>
+      </div>
+      <div class="detail-sec">
+        <div class="ds-head">Practice phrases</div>
+        <div class="phrase-block" style="background:var(--karuna-bg);border-color:rgba(224,112,112,0.1);">
+          <p style="color:rgba(224,112,112,0.9);">May I be free from pain and sorrow.<br>May I hold my own struggles with gentleness.<br>May I find relief and ease.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--karuna-bg);border-color:rgba(224,112,112,0.1);">
+          <p style="color:rgba(224,112,112,0.9);">May you be free from pain and suffering.<br>May you be free from mental and physical distress.<br>May you find the relief you need.<br>May you be held in compassion.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--karuna-bg);border-color:rgba(224,112,112,0.1);">
+          <p style="color:rgba(224,112,112,0.9);">May all beings who suffer in body find relief.<br>May all beings who suffer in mind find peace.<br>May compassion flow in all directions, without limit.</p>
+        </div>
+      </div>
+      <div class="ne-explain">
+        <div class="ne-e-title" style="color:var(--karuna);">The river bank image</div>
+        <div class="ne-e-body">Karuṇā without upekkhā becomes grief — two people drowning rather than one rescued. The Buddha called wallowing "a bottomless pit." Steadiness is what makes genuine help possible.</div>
+        <div class="antidote-row">
+          <div class="ant-arrow" style="color:var(--mudita);">→</div>
+          <div class="ant-text"><strong>Antidote: bring in muditā.</strong> Turn toward the person's strengths and goodness. You can hold both their suffering and their light.</div>
+        </div>
+      </div>
+      <div class="bq-box" style="border-left-color:var(--karuna);">
+        <div class="bq-text">"Compassion requires a strong, firm mindfulness — not a quaking mind — that keeps us steady and determined in the face of suffering."</div>
+        <div class="bq-attr">Bhante Gunaratana · Bhavana Society</div>
+      </div>
+      <div class="detail-sec">
+        <div class="ds-head">Bhante G on YouTube</div>
+        <a class="vid-link" href="https://www.youtube.com/watch?v=fuVlCPBmHdw" target="_blank">
+          <div class="vl-thumb" style="background:var(--karuna-d);"><div class="vl-play"></div></div>
+          <div class="vl-info"><div class="vl-title">Equanimity &amp; Compassion Q&amp;A</div><div class="vl-meta">Bhante G · Bhavana Society 2022</div></div>
+        </a>
+      </div>
+      <button class="hh-cta" style="width:100%;justify-content:center;border-radius:var(--r);background:var(--karuna);box-shadow:0 8px 32px var(--karuna-glow);" onclick="openPlayer('karuna')">▶ &nbsp;Begin Karuṇā session</button>
+    </div>
+
+    <!-- MUDITA panel -->
+    <div class="v-panel" id="vp-mudita">
+      <div class="v-hero" style="background:var(--mudita-bg);">
+        <div class="v-hero-glow" style="background:var(--mudita);"></div>
+        <div class="vh-pali" style="color:var(--mudita);">Muditā</div>
+        <div class="vh-eng" style="color:var(--mudita-d);">Sympathetic joy</div>
+        <div class="vh-desc">Mettā meeting happiness. Genuine delight in the joy and good fortune of others — their joy is complete in itself. I need not possess it to celebrate it.</div>
+      </div>
+      <div class="enemy-strip">
+        <div class="e-badge"><div class="e-type">Near enemy</div><div class="e-val">Excitement or envy — coveting another's joy</div></div>
+        <div class="e-badge"><div class="e-type">Far enemy</div><div class="e-val">Envy or resentment of others' happiness</div></div>
+      </div>
+      <div class="detail-sec">
+        <div class="ds-head">Practice phrases</div>
+        <div class="phrase-block" style="background:var(--mudita-bg);border-color:rgba(224,176,64,0.1);">
+          <p style="color:rgba(224,176,64,0.9);">May my happiness grow and continue.<br>May joy arise easily in my heart.<br>May I find delight in small and large things alike.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--mudita-bg);border-color:rgba(224,176,64,0.1);">
+          <p style="color:rgba(224,176,64,0.9);">May your happiness continue and grow.<br>I rejoice in your good fortune — may it increase.<br>May you not be separated from the happiness you have found.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--mudita-bg);border-color:rgba(224,176,64,0.1);">
+          <p style="color:rgba(224,176,64,0.9);">May all beings who are happy continue in their happiness.<br>May joy abound in all directions, without limit.</p>
+        </div>
+      </div>
+      <div class="ne-explain">
+        <div class="ne-e-title" style="color:var(--mudita);">The subtle test</div>
+        <div class="ne-e-body">Notice when admiration tips into comparison. Pure muditā is content with your own path. The moment you start wanting their circumstances — that is the near enemy speaking.</div>
+        <div class="antidote-row">
+          <div class="ant-arrow" style="color:var(--upekkha);">→</div>
+          <div class="ant-text"><strong>Antidote: bring in upekkhā.</strong> Recall impermanence. Their joy, like all things, will change. Find contentment with what is yours.</div>
+        </div>
+      </div>
+      <div class="bq-box" style="border-left-color:var(--mudita);">
+        <div class="bq-text">"Mudita practice helps us cultivate joy by setting the intention to be present for it. We begin to see more joy, and really find ourselves stopping to enjoy it."</div>
+        <div class="bq-attr">Theravāda Tradition · Bhavana Society</div>
+      </div>
+      <button class="hh-cta" style="width:100%;justify-content:center;border-radius:var(--r);background:var(--mudita);color:#1A1000;box-shadow:0 8px 32px var(--mudita-glow);" onclick="openPlayer('mudita')">▶ &nbsp;Begin Muditā session</button>
+    </div>
+
+    <!-- UPEKKHA panel -->
+    <div class="v-panel" id="vp-upekkha">
+      <div class="v-hero" style="background:var(--upekkha-bg);">
+        <div class="v-hero-glow" style="background:var(--upekkha);"></div>
+        <div class="vh-pali" style="color:var(--upekkha);">Upekkhā</div>
+        <div class="vh-eng" style="color:var(--upekkha-d);">Equanimity</div>
+        <div class="vh-desc">The crown of the four abodes — stable, warm, open-hearted presence. Not the absence of caring, but caring held with a steady, open hand. The mind like a clear sky.</div>
+      </div>
+      <div class="enemy-strip">
+        <div class="e-badge"><div class="e-type">Near enemy</div><div class="e-val">Indifference — cold detachment dressed as wisdom</div></div>
+        <div class="e-badge"><div class="e-type">Far enemy</div><div class="e-val">Restlessness, clinging, agitation</div></div>
+      </div>
+      <div class="detail-sec">
+        <div class="ds-head">Practice phrases</div>
+        <div class="phrase-block" style="background:var(--upekkha-bg);border-color:rgba(96,144,224,0.1);">
+          <p style="color:rgba(96,144,224,0.9);">All beings are the owners of their own karma.<br>Their happiness and suffering depend on their own actions.<br>I hold you with an open hand and an open heart.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--upekkha-bg);border-color:rgba(96,144,224,0.1);">
+          <p style="color:rgba(96,144,224,0.9);">May I not be swayed by gain and loss, praise and blame.<br>May the mind be spacious and the heart be free.</p>
+        </div>
+        <div class="phrase-block" style="background:var(--upekkha-bg);border-color:rgba(96,144,224,0.1);">
+          <p style="color:rgba(96,144,224,0.9);">May all beings rest in balance — neither grasping nor pushing away.<br>May all beings everywhere abide in peace.</p>
+        </div>
+      </div>
+      <div class="ne-explain">
+        <div class="ne-e-title" style="color:var(--upekkha);">Upekkhā is the crown, not a bypass</div>
+        <div class="ne-e-body">Using "equanimity" to skip past mettā, karuṇā, or muditā is almost always indifference wearing spiritual clothing. True upekkhā carries all three within it, held lightly. Buddhaghosa: it can only fully arise after the other three are cultivated.</div>
+        <div class="antidote-row">
+          <div class="ant-arrow" style="color:var(--metta);">→</div>
+          <div class="ant-text"><strong>Antidote: return to mettā.</strong> Rekindle the basic wish — may this being be well and happy. Love without agenda is the ground of everything.</div>
+        </div>
+      </div>
+      <div class="bq-box" style="border-left-color:var(--upekkha);">
+        <div class="bq-text">"Equanimity is not indifference — far from it. Without the other three it quickly becomes coldness. With them, it becomes the ground from which all genuine care flows."</div>
+        <div class="bq-attr">Theravāda Tradition · Bhavana Society</div>
+      </div>
+      <button class="hh-cta" style="width:100%;justify-content:center;border-radius:var(--r);background:var(--upekkha);box-shadow:0 8px 32px var(--upekkha-glow);" onclick="openPlayer('upekkha')">▶ &nbsp;Begin Upekkhā session</button>
+    </div>
+  </div>
+
+  <!-- ── SHADOWS (Near Enemies) ── -->
+  <div id="s-shadows" class="screen">
+    <div class="ne-cycle">
+      <div class="nec-title">The antidote cycle</div>
+      <div class="nec-grid">
+        <div class="nec-cell"><div class="nec-from">Mettā → attachment</div><div class="nec-to">Bring karuṇā — respect their independent path</div><div class="nec-arr">→ karuṇā</div></div>
+        <div class="nec-cell"><div class="nec-from">Karuṇā → grief</div><div class="nec-to">Bring muditā — turn toward their goodness</div><div class="nec-arr">→ muditā</div></div>
+        <div class="nec-cell"><div class="nec-from">Muditā → intoxication</div><div class="nec-to">Bring upekkhā — recall impermanence</div><div class="nec-arr">→ upekkhā</div></div>
+        <div class="nec-cell"><div class="nec-from">Upekkhā → indifference</div><div class="nec-to">Return to mettā — rekindle basic warmth</div><div class="nec-arr">→ mettā</div></div>
+      </div>
+    </div>
+
+    <div class="ne-acc">
+      <div class="ne-acc-header" onclick="toggleNE(this)">
+        <div class="ne-acc-dot" style="background:var(--metta);"></div>
+        <div class="ne-acc-name">Mettā</div>
+        <div class="ne-acc-tag" style="background:var(--metta-bg);color:var(--metta);">Near: attachment</div>
+        <div class="ne-acc-chev">▾</div>
+      </div>
+      <div class="ne-acc-body">
+        <div class="ne-row-lbl">The near enemy in practice</div>
+        <div class="ne-row-text">Possessive love — believing you know what is best for someone. Moving from wishing them well to needing them to follow a particular path. Conditional care with hidden strings.</div>
+        <div class="ne-pill-sm" style="background:var(--metta-bg);color:var(--metta);">"I care so much — they really should do it this way"</div>
+        <div class="ne-row-lbl">How to recognize it</div>
+        <div class="ne-row-text">Pure mettā has no agenda. The moment you feel hurt when someone chooses differently — the near enemy is present. You are more attached to the outcome than to their freedom.</div>
+        <div class="ne-row-lbl">Daily check</div>
+        <div class="ne-row-text">Am I wishing their happiness — or wishing my idea of their happiness?</div>
+        <div class="antidote-row" style="margin-top:10px;">
+          <div class="ant-arrow" style="color:var(--karuna);">→</div>
+          <div class="ant-text"><strong style="color:var(--karuna);">Antidote: karuṇā.</strong> Acknowledge their independent suffering and path. Their karma is their own.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ne-acc">
+      <div class="ne-acc-header" onclick="toggleNE(this)">
+        <div class="ne-acc-dot" style="background:var(--karuna);"></div>
+        <div class="ne-acc-name">Karuṇā</div>
+        <div class="ne-acc-tag" style="background:var(--karuna-bg);color:var(--karuna);">Near: grief / pity</div>
+        <div class="ne-acc-chev">▾</div>
+      </div>
+      <div class="ne-acc-body">
+        <div class="ne-row-lbl">Two faces of the near enemy</div>
+        <div class="ne-row-text">First: collapsing into suffering — being swept into the current. Second (subtler): a faint superiority — "poor soul." The grief in the second is hidden, emerging when the person finds your help intrusive.</div>
+        <div class="ne-pill-sm" style="background:var(--karuna-bg);color:var(--karuna);">"I feel so terrible for them I can't function"</div>
+        <div class="ne-row-lbl">The river bank</div>
+        <div class="ne-row-text">One arm reaches toward the person in the current — the other is anchored to the tree (upekkhā). Jumping in means two people drowning. The Buddha called wallowing "a bottomless pit."</div>
+        <div class="ne-row-lbl">Daily check</div>
+        <div class="ne-row-text">Am I holding their suffering with courage — or collapsing, or turning away?</div>
+        <div class="antidote-row" style="margin-top:10px;">
+          <div class="ant-arrow" style="color:var(--mudita);">→</div>
+          <div class="ant-text"><strong style="color:var(--mudita);">Antidote: muditā.</strong> Turn toward their good qualities and resilience. Hold both their suffering and their goodness.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ne-acc">
+      <div class="ne-acc-header" onclick="toggleNE(this)">
+        <div class="ne-acc-dot" style="background:var(--mudita);"></div>
+        <div class="ne-acc-name">Muditā</div>
+        <div class="ne-acc-tag" style="background:var(--mudita-bg);color:var(--mudita);">Near: excitement</div>
+        <div class="ne-acc-chev">▾</div>
+      </div>
+      <div class="ne-acc-body">
+        <div class="ne-row-lbl">The near enemy</div>
+        <div class="ne-row-text">Excitement or intoxication — swept up in another's joy in a way more about stimulation than genuine gladness. Also: coveting their circumstances, wanting to live their life rather than celebrating it.</div>
+        <div class="ne-pill-sm" style="background:var(--mudita-bg);color:var(--mudita);">"I'm happy for them — I wish I had what they have"</div>
+        <div class="ne-row-lbl">The subtle test</div>
+        <div class="ne-row-text">Pure muditā is content with your own path. Notice when admiration tips into comparison. Their joy is enough — complete in itself — you don't need it for yourself.</div>
+        <div class="ne-row-lbl">Daily check</div>
+        <div class="ne-row-text">Am I genuinely glad for their joy — or comparing it to what I have or lack?</div>
+        <div class="antidote-row" style="margin-top:10px;">
+          <div class="ant-arrow" style="color:var(--upekkha);">→</div>
+          <div class="ant-text"><strong style="color:var(--upekkha);">Antidote: upekkhā.</strong> Recall impermanence. Find contentment with your own path.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ne-acc">
+      <div class="ne-acc-header" onclick="toggleNE(this)">
+        <div class="ne-acc-dot" style="background:var(--upekkha);"></div>
+        <div class="ne-acc-name">Upekkhā</div>
+        <div class="ne-acc-tag" style="background:var(--upekkha-bg);color:var(--upekkha);">Near: indifference</div>
+        <div class="ne-acc-chev">▾</div>
+      </div>
+      <div class="ne-acc-body">
+        <div class="ne-row-lbl">The most seductive near enemy</div>
+        <div class="ne-row-text">Indifference dressed as wisdom. Reciting "all beings have karma" without warmth — like a parrot, as Buddhaghosa wrote. The "nothing I can do" stance that slowly shuts the heart while appearing serene.</div>
+        <div class="ne-pill-sm" style="background:var(--upekkha-bg);color:var(--upekkha);">"I've accepted it — I feel nothing about it now"</div>
+        <div class="ne-row-lbl">The crown requires a foundation</div>
+        <div class="ne-row-text">Buddhaghosa: upekkhā reaches deep concentration only after the other three are cultivated. Using it to bypass mettā, karuṇā, or muditā is almost always the near enemy. True upekkhā carries all three within it.</div>
+        <div class="ne-row-lbl">Daily check</div>
+        <div class="ne-row-text">Am I at ease with what I can't control — or have I simply gone numb?</div>
+        <div class="antidote-row" style="margin-top:10px;">
+          <div class="ant-arrow" style="color:var(--metta);">→</div>
+          <div class="ant-text"><strong style="color:var(--metta);">Antidote: mettā.</strong> Rekindle the basic wish: may this being be well and happy. Love without agenda is the ground.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── JOURNAL ── -->
+  <div id="s-journal" class="screen">
+    <div class="streak-card">
+      <div class="sc-inner">
+        <div class="sc-num" id="sc-num">0</div>
+        <div class="sc-lbl">DAY STREAK</div>
+      </div>
+      <div class="sc-wk" id="sc-wk"></div>
+    </div>
+
+    <div class="sec-label">Mark today's practice</div>
+    <div class="today-tiles">
+      <div class="tt" id="tt-metta" onclick="toggleTT('metta')" style="border-color:rgba(76,175,128,0.2);">
+        <div class="tt-ck" id="ttc-metta" style="color:var(--metta);">○</div>
+        <div class="tt-pali" style="color:var(--metta);">Mettā</div>
+        <div class="tt-eng">Loving-friendliness</div>
+      </div>
+      <div class="tt" id="tt-karuna" onclick="toggleTT('karuna')" style="border-color:rgba(224,112,112,0.2);">
+        <div class="tt-ck" id="ttc-karuna" style="color:var(--karuna);">○</div>
+        <div class="tt-pali" style="color:var(--karuna);">Karuṇā</div>
+        <div class="tt-eng">Compassion</div>
+      </div>
+      <div class="tt" id="tt-mudita" onclick="toggleTT('mudita')" style="border-color:rgba(224,176,64,0.2);">
+        <div class="tt-ck" id="ttc-mudita" style="color:var(--mudita);">○</div>
+        <div class="tt-pali" style="color:var(--mudita);">Muditā</div>
+        <div class="tt-eng">Sympathetic joy</div>
+      </div>
+      <div class="tt" id="tt-upekkha" onclick="toggleTT('upekkha')" style="border-color:rgba(96,144,224,0.2);">
+        <div class="tt-ck" id="ttc-upekkha" style="color:var(--upekkha);">○</div>
+        <div class="tt-pali" style="color:var(--upekkha);">Upekkhā</div>
+        <div class="tt-eng">Equanimity</div>
+      </div>
+    </div>
+    <div id="tt-msg" style="text-align:center;min-height:22px;font-family:'Playfair Display',serif;font-style:italic;font-size:0.88rem;color:var(--text2);margin-bottom:1.25rem;"></div>
+
+    <div class="sec-label">Daily reflection</div>
+    <div class="reflect-cards">
+      <div class="rc"><div class="rc-q" style="color:var(--metta);">Mettā — where did loving-friendliness arise today?</div><textarea class="rc-ta" id="r-metta" placeholder="A moment of warmth..."></textarea></div>
+      <div class="rc"><div class="rc-q" style="color:var(--karuna);">Karuṇā — where did you meet suffering with an open heart?</div><textarea class="rc-ta" id="r-karuna" placeholder="A moment of tenderness..."></textarea></div>
+      <div class="rc"><div class="rc-q" style="color:var(--mudita);">Muditā — what joy could you genuinely celebrate today?</div><textarea class="rc-ta" id="r-mudita" placeholder="Someone's success, a delight..."></textarea></div>
+      <div class="rc"><div class="rc-q" style="color:var(--upekkha);">Upekkhā — where did you find or lose equanimity?</div><textarea class="rc-ta" id="r-upekkha" placeholder="A moment of balance or when you were pulled off center..."></textarea></div>
+    </div>
+    <button class="save-refl" onclick="saveRefl()">Save today's reflection</button>
+
+    <div class="closing">
+      <div class="cl-text">May all beings be happy and secure.<br>May all beings have happy minds.<br>May all beings be free from suffering.<br>May all beings quickly obtain liberation.</div>
+      <div class="cl-attr">Bhavana Society Closing Verse · Bhante G</div>
+    </div>
+  </div>
+
+  <!-- Bottom nav -->
+  <nav class="bnav">
+    <button class="bn-item active" id="bn-home" onclick="sw('home')"><div class="bn-ico">⌂</div><div class="bn-lbl">Home</div></button>
+    <button class="bn-item" id="bn-explore" onclick="sw('explore')"><div class="bn-ico">◈</div><div class="bn-lbl">Learn</div></button>
+    <button class="bn-item" id="bn-shadows" onclick="sw('shadows')"><div class="bn-ico">⟡</div><div class="bn-lbl">Shadows</div></button>
+    <button class="bn-item" id="bn-journal" onclick="sw('journal')"><div class="bn-ico">◇</div><div class="bn-lbl">Journal</div></button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════════════
+     PLAYER (full-screen immersive)
+══════════════════════════════════ -->
+<div id="player-screen">
+  <div class="player-bg" id="pl-bg"></div>
+  <div class="player-noise"></div>
+  <div class="player-inner">
+
+    <div class="player-top">
+      <button class="player-close" onclick="closePlayer()">✕</button>
+      <div class="player-session-name" id="pl-session-name">FULL SESSION</div>
+      <div class="player-step-indicator" id="pl-step-ind">1 / 6</div>
+    </div>
+
+    <div class="player-orb-wrap">
+      <div class="orb-outer">
+        <div class="orb-ring-1" id="orb-r1"></div>
+        <div class="orb-ring-2" id="orb-r2"></div>
+        <div class="orb-ring-3" id="orb-r3"></div>
+        <div class="orb-core state-playing" id="orb-core">
+          <div class="orb-core-inner" id="orb-inner"></div>
+          <div class="orb-breathing" id="orb-breath"></div>
+          <div class="orb-symbol" id="orb-sym">◎</div>
+        </div>
+      </div>
+
+      <div class="breath-guide">
+        <div class="bg-action" id="bg-action">Breathe naturally</div>
+        <div class="bg-sub" id="bg-sub">settle in</div>
+      </div>
+
+      <div class="player-phrase">
+        <div class="pp-text" id="pl-phrase">Find a comfortable upright seat. Let the body settle. Take three slow natural breaths. You are arriving.</div>
+      </div>
+
+      <div class="player-timer">
+        <div class="ptimer-ring">
+          <svg width="88" height="88" viewBox="0 0 88 88">
+            <circle class="ptimer-track" cx="44" cy="44" r="38"/>
+            <circle class="ptimer-prog" id="pt-prog" cx="44" cy="44" r="38" stroke="var(--metta)" stroke-dasharray="239" stroke-dashoffset="0"/>
+          </svg>
+          <div class="ptimer-center">
+            <div class="ptimer-time" id="pt-time">—:——</div>
+            <div class="ptimer-lbl" id="pt-lbl">PHASE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-steps" id="pl-steps"></div>
+    <div class="pc-phase-label" id="pc-phase-lbl">SETTLING</div>
+
+    <div class="player-controls">
+      <button class="pc-prev" onclick="prevPhase()">⏮</button>
+      <button class="pc-main" id="pc-main-btn" onclick="togglePlay()">▶</button>
+      <button class="pc-next" onclick="nextPhase()">⏭</button>
+    </div>
+
+    <!-- Audio toggles -->
+    <div style="display:flex;gap:8px;justify-content:center;padding-bottom:0.5rem;">
+      <button id="audio-voice-btn" onclick="toggleVoice()"
+        style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:50px;
+               padding:6px 14px;font-size:0.68rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;cursor:pointer;">
+        🗣 Voice: On
+      </button>
+      <button id="audio-amb-btn" onclick="toggleAmbient()"
+        style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:50px;
+               padding:6px 14px;font-size:0.68rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;cursor:pointer;">
+        🎵 Tone: On
+      </button>
+    </div>
+
+    <!-- Real Bhante G recording link -->
+    <div style="text-align:center;padding:0.5rem 0 calc(env(safe-area-inset-bottom,0px) + 1rem);">
+      <a id="dharma-seed-link" href="https://dharmaseed.org/talks/43632/" target="_blank"
+        style="font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.1em;text-transform:uppercase;
+               text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:1px;">
+        Real Bhante G recording on Dharma Seed ›
+      </a>
+    </div>
+  </div>
+</div>
+
+</div><!-- #app -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════
+const RGB = {
+  metta:   '76,175,128',
+  karuna:  '224,112,112',
+  mudita:  '224,176,64',
+  upekkha: '96,144,224'
+};
+
+const VCOLORS = {
+  metta:   {hex:'#4CAF80', dark:'#2D7A55', label:'METTĀ',   sym:'M'},
+  karuna:  {hex:'#E07070', dark:'#A03040', label:'KARUṆĀ',  sym:'K'},
+  mudita:  {hex:'#E0B040', dark:'#A07820', label:'MUDITĀ',  sym:'Mu'},
+  upekkha: {hex:'#6090E0', dark:'#3050A0', label:'UPEKKHĀ', sym:'U'},
+};
+
+// Each phase has guided[] — an array of {text, pause} segments
+// ONE sentence per segment. pause = silence in seconds AFTER the sentence finishes speaking.
+// Generous pauses — the silence is as important as the words.
+const PHASES = [
+  {
+    id:'settle', label:'Settling', vihara:'metta', mins:3,
+    sym:'◎', action:'Breathe naturally', sub:'settle in',
+    phrase:'Find a comfortable upright seat. Let the body settle. Take three slow natural breaths. You are arriving.',
+    guided:[
+      {text:'Find a comfortable upright seat.', pause:5},
+      {text:'Let the spine be naturally tall.', pause:4},
+      {text:'Rest the hands gently in your lap.', pause:5},
+      {text:'Close the eyes, or lower the gaze softly toward the floor.', pause:6},
+      {text:'Take one slow, natural breath.', pause:7},
+      {text:'Not controlling the breath.', pause:5},
+      {text:'Simply noticing it.', pause:8},
+      {text:'Take another breath.', pause:6},
+      {text:'Feel the body soften.', pause:7},
+      {text:'And one more.', pause:5},
+      {text:'Let the shoulders drop.', pause:5},
+      {text:'Let the jaw release.', pause:7},
+      {text:'You are arriving.', pause:5},
+      {text:'There is nowhere else to be.', pause:9},
+      {text:'Silently, set your intention for this practice.', pause:5},
+      {text:'I am here to cultivate the four divine abodes.', pause:6},
+      {text:'May they become the constant dwelling place of my heart.', pause:14},
+      {text:'Simply rest here.', pause:8},
+      {text:'Breathing.', pause:5},
+      {text:'Settling.', pause:12},
+    ]
+  },
+  {
+    id:'metta', label:'Mettā', vihara:'metta', mins:8,
+    sym:'💚', action:'Inhale warmth', sub:'exhale to all beings',
+    phrase:'May I be gentle. May I be relaxed. May I be happy and peaceful.\nMay all beings be well, happy, and peaceful.\nMay all beings everywhere be filled with loving-friendliness — abundant, exalted, and measureless.',
+    guided:[
+      {text:'We begin with metta — loving-friendliness.', pause:5},
+      {text:'The foundation of all four divine abodes.', pause:6},
+      {text:'Metta begins with yourself.', pause:5},
+      {text:'A heart at war with itself cannot radiate peace outward.', pause:7},
+      {text:'Bring your attention gently to your own heart.', pause:5},
+      {text:'Notice whatever is there — without judgment.', pause:8},
+      {text:'And silently, offer yourself these wishes.', pause:5},
+      {text:'May I be gentle.', pause:7},
+      {text:'May I be relaxed.', pause:7},
+      {text:'May I be happy and peaceful.', pause:7},
+      {text:'May I be healthy.', pause:7},
+      {text:'May my heart become soft.', pause:7},
+      {text:'May my words be pleasing.', pause:6},
+      {text:'May my actions be kind.', pause:10},
+      {text:'Now bring to mind someone you love.', pause:5},
+      {text:'A parent, a dear friend, a teacher.', pause:6},
+      {text:'Hold them in your heart with warmth.', pause:6},
+      {text:'May you be well, happy, and peaceful.', pause:7},
+      {text:'May no harm come to you.', pause:7},
+      {text:'May you have patience, courage, and understanding.', pause:7},
+      {text:'To meet and overcome the inevitable difficulties of life.', pause:10},
+      {text:'Now bring to mind someone neutral.', pause:5},
+      {text:'A neighbor, a stranger you see regularly.', pause:5},
+      {text:'Extend the same wish to them.', pause:5},
+      {text:'No conditions. No history.', pause:5},
+      {text:'Simply — may you be well.', pause:9},
+      {text:'And now — gently — bring to mind someone difficult.', pause:6},
+      {text:'Someone with whom there is friction or pain.', pause:6},
+      {text:'You are not condoning harm.', pause:5},
+      {text:'You are dissolving the prison of your own enmity.', pause:7},
+      {text:'May you also be well, happy, and peaceful.', pause:10},
+      {text:'Now let the mind expand.', pause:5},
+      {text:'Like a bell whose sound reaches all four directions.', pause:6},
+      {text:'May all beings in all ten directions be well, happy, and peaceful.', pause:8},
+      {text:'May all beings everywhere be filled with loving-friendliness.', pause:8},
+      {text:'Abundant, exalted, and measureless.', pause:10},
+      {text:'Rest in this vast wish.', pause:6},
+      {text:'The heart open in all directions.', pause:15},
+    ]
+  },
+  {
+    id:'karuna', label:'Karuṇā', vihara:'karuna', mins:6,
+    sym:'❤️', action:'Open to suffering', sub:'with steady courage',
+    phrase:'May I be free from pain and sorrow.\nMay you be free from pain and suffering.\nMay compassion flow in all directions, without limit.',
+    guided:[
+      {text:'Karuna — compassion.', pause:5},
+      {text:'This is what metta becomes when it meets suffering.', pause:7},
+      {text:'Karuna asks us to turn toward pain.', pause:5},
+      {text:'Not to be consumed by it.', pause:5},
+      {text:'But to meet it with steadiness and an open heart.', pause:8},
+      {text:'Begin with yourself.', pause:5},
+      {text:'With your own struggles, your own wounds.', pause:6},
+      {text:'May I be free from pain and sorrow.', pause:8},
+      {text:'May I hold my own struggles with gentleness.', pause:8},
+      {text:'May I find relief and ease.', pause:10},
+      {text:'Now bring to mind someone who is suffering right now.', pause:5},
+      {text:'Someone carrying something heavy.', pause:6},
+      {text:'Hold them in your heart with steadiness.', pause:5},
+      {text:'Not helplessness.', pause:5},
+      {text:'One arm reaching toward them.', pause:5},
+      {text:'One arm anchored to the tree.', pause:7},
+      {text:'May you be free from pain and suffering.', pause:8},
+      {text:'May you be free from mental and physical distress.', pause:8},
+      {text:'May you find the relief you need.', pause:10},
+      {text:'Now open this compassion wider.', pause:5},
+      {text:'Think of all who are suffering in the world right now.', pause:6},
+      {text:'You cannot fix their suffering.', pause:5},
+      {text:'But you can hold it without turning away.', pause:7},
+      {text:'May all beings who suffer in body find relief.', pause:8},
+      {text:'May all beings who suffer in mind find peace.', pause:8},
+      {text:'May compassion flow in all directions — without limit, without exclusion.', pause:10},
+      {text:'Sit quietly for a moment.', pause:5},
+      {text:'Simply feel the quality of compassion in the body.', pause:6},
+      {text:'Steady.', pause:4},
+      {text:'Open.', pause:4},
+      {text:'Warm.', pause:12},
+    ]
+  },
+  {
+    id:'mudita', label:'Muditā', vihara:'mudita', mins:6,
+    sym:'🌟', action:'Open to joy', sub:'rejoice freely',
+    phrase:'May your happiness continue and grow.\nI rejoice in your good fortune — may it increase.\nMay joy abound in all directions, without limit.',
+    guided:[
+      {text:'Mudita — sympathetic joy.', pause:5},
+      {text:'This is metta meeting happiness.', pause:6},
+      {text:'Genuine delight in the joy of others.', pause:5},
+      {text:'Without comparison, without envy.', pause:5},
+      {text:'Their joy is enough.', pause:5},
+      {text:'We need not possess it to celebrate it.', pause:8},
+      {text:'Begin with a moment of your own happiness.', pause:5},
+      {text:'Something simple.', pause:5},
+      {text:'A good conversation.', pause:5},
+      {text:'Morning light.', pause:5},
+      {text:'A kindness received.', pause:6},
+      {text:'Let yourself feel it.', pause:5},
+      {text:'Without rushing past it.', pause:7},
+      {text:'May my happiness grow and continue.', pause:7},
+      {text:'May joy arise easily in my heart.', pause:9},
+      {text:'Now bring to mind someone whose life is going well.', pause:5},
+      {text:'Someone flourishing.', pause:6},
+      {text:'Notice any subtle resistance.', pause:5},
+      {text:'Any comparison or wish that you had what they have.', pause:5},
+      {text:'This is natural. Simply notice it, and return.', pause:7},
+      {text:'Their joy is complete in itself.', pause:5},
+      {text:'I need not possess it to celebrate it.', pause:7},
+      {text:'May your happiness continue and grow.', pause:7},
+      {text:'May your joy be lasting and deep.', pause:7},
+      {text:'I rejoice in your good fortune — may it increase.', pause:8},
+      {text:'May you not be separated from the happiness you have found.', pause:10},
+      {text:'Now extend this rejoicing to all beings who are happy.', pause:6},
+      {text:'May all beings who are happy continue in their happiness.', pause:8},
+      {text:'May joy abound in all directions — without limit.', pause:10},
+      {text:'Rest in this quality.', pause:5},
+      {text:'Let it be light.', pause:5},
+      {text:'Let it be warm.', pause:12},
+    ]
+  },
+  {
+    id:'upekkha', label:'Upekkhā', vihara:'upekkha', mins:6,
+    sym:'🔵', action:'Rest in balance', sub:'open steady presence',
+    phrase:'All beings are the owners of their own karma.\nI hold you with an open hand and an open heart.\nMay all beings rest in balance — neither grasping nor pushing away.',
+    guided:[
+      {text:'Upekkha — equanimity.', pause:5},
+      {text:'The balancing factor.', pause:5},
+      {text:'The crown of the four abodes.', pause:7},
+      {text:'Equanimity is not indifference.', pause:5},
+      {text:'It is stability inside caring.', pause:5},
+      {text:'The mind like a clear sky.', pause:5},
+      {text:'Through which everything passes.', pause:5},
+      {text:'Which nothing disturbs.', pause:9},
+      {text:'Take five slow breaths.', pause:5},
+      {text:'With each breath, feel the weight of the body.', pause:6},
+      {text:'Let the mind settle.', pause:16},
+      {text:'You are not reaching toward anything.', pause:5},
+      {text:'You are simply here.', pause:9},
+      {text:'Bring to mind something you have been gripping.', pause:5},
+      {text:'A worry.', pause:5},
+      {text:'A wish that things were different.', pause:6},
+      {text:'Offer it to equanimity.', pause:5},
+      {text:'Not to stop caring — but to hold it lightly.', pause:8},
+      {text:'All beings are the owners of their own karma.', pause:7},
+      {text:'Their happiness and unhappiness depend on their own actions.', pause:8},
+      {text:'I hold you with an open hand and an open heart.', pause:10},
+      {text:'May I not be swayed by gain and loss.', pause:7},
+      {text:'By praise and blame.', pause:6},
+      {text:'By pleasure and pain.', pause:8},
+      {text:'May the mind be spacious.', pause:6},
+      {text:'And the heart be free.', pause:10},
+      {text:'May all beings rest in balance.', pause:7},
+      {text:'Neither grasping nor pushing away.', pause:7},
+      {text:'May all beings everywhere abide in peace.', pause:10},
+      {text:'Simply rest.', pause:6},
+      {text:'The mind open.', pause:5},
+      {text:'Balanced.', pause:5},
+      {text:'Still.', pause:15},
+    ]
+  },
+  {
+    id:'close', label:'Closing', vihara:'metta', mins:2,
+    sym:'◎', action:'Rest in stillness', sub:'returning',
+    phrase:'May all beings be happy and secure.\nMay all beings have happy minds.\nMay all beings be free from suffering.\nMay all beings quickly obtain liberation.',
+    guided:[
+      {text:'We close our practice with the Bhavana Society closing verse.', pause:5},
+      {text:'May all beings be happy and secure.', pause:7},
+      {text:'May all beings have happy minds.', pause:7},
+      {text:'May all beings be free from suffering.', pause:7},
+      {text:'May all beings quickly obtain liberation.', pause:10},
+      {text:'Sit quietly for a moment.', pause:6},
+      {text:'Notice the quality of the mind.', pause:5},
+      {text:'Perhaps softer.', pause:4},
+      {text:'Perhaps wider.', pause:6},
+      {text:'Whatever is present — it is the fruit of sincere effort.', pause:8},
+      {text:'These states should become the mind\'s constant dwelling-places.', pause:6},
+      {text:'Not merely places of rare visits, soon forgotten.', pause:8},
+      {text:'Take one slow breath.', pause:6},
+      {text:'And when you are ready, gently open the eyes.', pause:8},
+      {text:'Carry whatever softness you have cultivated here into the rest of your day.', pause:6},
+    ]
+  }
+];
+
+const SINGLE = {
+  metta:   [PHASES[0], PHASES[1], PHASES[5]],
+  karuna:  [PHASES[0], PHASES[2], PHASES[5]],
+  mudita:  [PHASES[0], PHASES[3], PHASES[5]],
+  upekkha: [PHASES[0], PHASES[4], PHASES[5]],
+  full:    PHASES
+};
+
+// ════════════════════════════════════════
+// AUDIO ENGINE — MP3-first, Web Speech fallback
+// ════════════════════════════════════════
+
+// Path to the audio/ folder relative to the HTML file.
+var AUDIO_PATH   = 'audio/';
+var audioCtx     = null;
+var voiceEnabled = true;
+var currentAudio = null;   // active HTMLAudioElement
+var guidedSegIdx = 0;
+var guidedTimeout= null;
+var speakTimeout = null;
+
+// Probe whether MP3s are available (set to true after generate)
+var mp3Available = false;
+(function() {
+  var t = new Audio(AUDIO_PATH + 'settle_01.mp3');
+  t.addEventListener('canplaythrough', function(){ mp3Available = true; }, {once:true});
+  t.load();
+})();
+
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+// ── Tibetan Bowl ──────────────────────────────────────────
+function playBowl(freq, duration, vol) {
+  try {
+    var ctx = getAudioCtx();
+    if (ctx.state === 'suspended') ctx.resume();
+    var o1 = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain();
+    o1.type = o2.type = 'sine';
+    o1.frequency.value = freq; o2.frequency.value = freq * 1.005;
+    o1.connect(g); o2.connect(g); g.connect(ctx.destination);
+    g.gain.setValueAtTime(0, ctx.currentTime);
+    g.gain.linearRampToValueAtTime(vol || 0.18, ctx.currentTime + 0.06);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (duration || 4));
+    o1.start(); o2.start();
+    o1.stop(ctx.currentTime + (duration || 4));
+    o2.stop(ctx.currentTime + (duration || 4));
+  } catch(e) {}
+}
+
+// ── MP3 playback ──────────────────────────────────────────
+function stopCurrentAudio() {
+  if (currentAudio) {
+    try { currentAudio.pause(); currentAudio.currentTime = 0; } catch(e) {}
+    currentAudio = null;
+  }
+}
+
+function playMP3(filename, onEnd) {
+  stopCurrentAudio();
+  var audio = new Audio(AUDIO_PATH + filename);
+  audio.volume = 0.92;
+  currentAudio = audio;
+  audio.addEventListener('ended', function(){ currentAudio = null; if (onEnd) onEnd(); });
+  audio.addEventListener('error', function(){ currentAudio = null; if (onEnd) onEnd(); });
+  audio.play().catch(function(){ currentAudio = null; if (onEnd) onEnd(); });
+}
+
+// ── Web Speech fallback ───────────────────────────────────
+var _voice = null;
+function getVoice() {
+  if (_voice) return _voice;
+  var voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+  var pref = ['Daniel','Google UK English Male','Arthur','Alex','Samantha','Karen'];
+  for (var i = 0; i < pref.length; i++)
+    for (var j = 0; j < voices.length; j++)
+      if (voices[j].name.indexOf(pref[i]) >= 0) { _voice = voices[j]; return _voice; }
+  for (var k = 0; k < voices.length; k++)
+    if (voices[k].lang && voices[k].lang.indexOf('en') === 0) { _voice = voices[k]; return _voice; }
+  return voices[0] || null;
+}
+
+function speakFallback(text, onEnd) {
+  if (!window.speechSynthesis) { if (onEnd) onEnd(); return; }
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.rate = 0.68; u.pitch = 0.82; u.volume = 0.80;
+  var v = getVoice(); if (v) u.voice = v;
+  u.onend = u.onerror = function() { if (onEnd) onEnd(); };
+  window.speechSynthesis.speak(u);
+}
+
+// ── Unified: MP3 first, Web Speech fallback ───────────────
+function speakSegment(seg, onEnd) {
+  if (!voiceEnabled) { if (onEnd) onEnd(); return; }
+  if (mp3Available) {
+    playMP3(seg.filename, onEnd);
+  } else {
+    speakFallback(seg.text, onEnd);
+  }
+}
+
+// ── Stop all audio ────────────────────────────────────────
+function stopSpeech() {
+  stopCurrentAudio();
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  if (guidedTimeout) { clearTimeout(guidedTimeout); guidedTimeout = null; }
+  if (speakTimeout)  { clearTimeout(speakTimeout);  speakTimeout  = null; }
+  guidedSegIdx = 0;
+}
+
+// ── Guided script runner ──────────────────────────────────
+function runGuidedScript(segments) {
+  guidedSegIdx = 0;
+  function nextSeg() {
+    if (!timerRunning) return;
+    if (guidedSegIdx >= segments.length) return;
+    var seg = segments[guidedSegIdx];
+    guidedSegIdx++;
+    var el = document.getElementById('pl-phrase');
+    if (el) el.textContent = seg.text;
+    setTimeout(function() {
+      speakSegment(seg, function() {
+        if (!timerRunning) return;
+        guidedTimeout = setTimeout(nextSeg, (seg.pause || 6) * 1000);
+      });
+    }, 200);
+  }
+  guidedTimeout = setTimeout(nextSeg, 2000);
+}
+
+// ── Phase start: bowl → silence → voice ──────────────────
+function startPhaseAudio(ph) {
+  stopSpeech();
+  if (!timerRunning) return;
+  var bowlFreqs = {settle:440, metta:432, karuna:384, mudita:528, upekkha:396, close:440};
+  playBowl(bowlFreqs[ph.id] || 432, 5, 0.20);
+  if (ph.guided && voiceEnabled) {
+    speakTimeout = setTimeout(function() {
+      if (timerRunning) runGuidedScript(ph.guided);
+    }, 3000);
+  }
+}
+
+function endBell() { playBowl(396, 6, 0.18); }
+
+// ── UI toggles ────────────────────────────────────────────
+function toggleVoice() {
+  voiceEnabled = !voiceEnabled;
+  var btn = document.getElementById('audio-voice-btn');
+  if (btn) btn.textContent = voiceEnabled ? '\uD83D\uDDE3 Voice: On' : '\uD83D\uDD07 Voice: Off';
+  if (!voiceEnabled) stopSpeech();
+}
+
+function toggleAmbient() {
+  var btn = document.getElementById('audio-amb-btn');
+  if (btn) btn.textContent = '\uD83C\uDFB5 Bowl: On';
+}
+
+
+let streak = 0;
+let todayDone = {};
+let playerPhases = PHASES.slice();
+let curPhaseIdx = 0;
+let timerSecs = 0;
+let timerTotal = 1;
+let timerRunning = false;
+let timerIv = null;
+let breathTimeoutId = null;
+
+// ════════════════════════════════════════
+// ONBOARDING
+// ════════════════════════════════════════
+function enterApp(){
+  document.getElementById('onboard').style.display='none';
+  document.getElementById('main').style.display='block';
+  initHome();
+  buildWeekDots();
+}
+
+function initHome(){
+  const h = new Date().getHours();
+  const greet = h < 12 ? 'GOOD MORNING' : h < 17 ? 'GOOD AFTERNOON' : 'GOOD EVENING';
+  document.getElementById('hh-greet').textContent = greet;
+  const vs = ['metta','karuna','mudita','upekkha'];
+  const v = vs[new Date().getDay() % 4];
+  const vc = VCOLORS[v];
+  const names = {metta:'Mettā', karuna:'Karuṇā', mudita:'Muditā', upekkha:'Upekkhā'};
+  const descs = {
+    metta:   'Loving-friendliness — the foundation of all four divine abodes. Begin here.',
+    karuna:  'Compassion — mettā meeting suffering. Hold steady at the river bank today.',
+    mudita:  'Sympathetic joy — rejoice in the happiness of others without comparison.',
+    upekkha: 'Equanimity — stable, warm, open-hearted presence. The crown of the four abodes.'
+  };
+  document.getElementById('hh-vihara').textContent = names[v];
+  document.getElementById('hh-vihara').style.color = vc.hex;
+  document.getElementById('hh-desc').textContent = descs[v];
+}
+
+// ════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════
+function sw(name) {
+  ['home','explore','shadows','journal'].forEach(function(s) {
+    document.getElementById('s-'+s).classList.toggle('active', s===name);
+    document.getElementById('bn-'+s).classList.toggle('active', s===name);
+  });
+  window.scrollTo(0,0);
+}
+
+function switchV(v, btn) {
+  document.querySelectorAll('.v-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.v-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('vp-'+v).classList.add('active');
+}
+
+function toggleNE(hdr) {
+  var body = hdr.nextElementSibling;
+  var ch   = hdr.querySelector('.ne-acc-chev');
+  var open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  ch.classList.toggle('open', !open);
+}
+
+// ════════════════════════════════════════
+// PLAYER
+// ════════════════════════════════════════
+var BG_COLORS = {
+  metta:   '#0D2218',
+  karuna:  '#220D10',
+  mudita:  '#1A1500',
+  upekkha: '#0D1220'
+};
+
+function stopTimers() {
+  clearInterval(timerIv);
+  timerIv = null;
+  if (breathTimeoutId) { clearTimeout(breathTimeoutId); breathTimeoutId = null; }
+  timerRunning = false;
+  stopSpeech();
+}
+
+function openPlayer(mode) {
+  stopTimers();
+  playerPhases = (SINGLE[mode] || PHASES).slice();
+  curPhaseIdx  = 0;
+  var sessionLabel = mode === 'full' ? 'FULL SESSION' : (VCOLORS[mode] ? VCOLORS[mode].label + ' SESSION' : 'SESSION');
+  document.getElementById('pl-session-name').textContent = sessionLabel;
+
+  // Set Dharma Seed real recording link per mode
+  var dsLinks = {
+    metta:   'https://dharmaseed.org/talks/43632/',
+    karuna:  'https://dharmaseed.org/talks/43632/',
+    mudita:  'https://dharmaseed.org/talks/43632/',
+    upekkha: 'https://dharmaseed.org/talks/43632/',
+    full:    'https://dharmaseed.org/teacher/410/'
+  };
+  var linkEl = document.getElementById('dharma-seed-link');
+  if (linkEl) linkEl.href = dsLinks[mode] || dsLinks.full;
+
+  document.getElementById('player-screen').classList.add('open');
+  buildStepDots();
+  loadPhase(0);
+  document.getElementById('pc-main-btn').textContent = '▶';
+  // Pre-load voices so first utterance is ready
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+    // Chrome sometimes needs a small trigger
+    var dummy = new SpeechSynthesisUtterance('');
+    window.speechSynthesis.speak(dummy);
+    window.speechSynthesis.cancel();
+  }
+}
+
+function closePlayer() {
+  stopTimers();
+  document.getElementById('player-screen').classList.remove('open');
+}
+
+function buildStepDots() {
+  var el = document.getElementById('pl-steps');
+  el.innerHTML = playerPhases.map(function(_,i){
+    return '<div class="ps-dot' + (i===0 ? ' current' : '') + '" id="psd-'+i+'"></div>';
+  }).join('');
+}
+
+function loadPhase(idx) {
+  var ph = playerPhases[idx];
+  if (!ph) return;
+  var vc = VCOLORS[ph.vihara];
+  var rgb = RGB[ph.vihara];
+
+  // Step dots
+  playerPhases.forEach(function(_,i) {
+    var d = document.getElementById('psd-'+i);
+    if (!d) return;
+    d.className = 'ps-dot' + (i < idx ? ' done' : i === idx ? ' current' : '');
+  });
+
+  document.getElementById('pl-step-ind').textContent  = (idx+1) + ' / ' + playerPhases.length;
+  document.getElementById('pc-phase-lbl').textContent  = ph.label.toUpperCase();
+
+  // Background
+  document.getElementById('pl-bg').style.background =
+    'radial-gradient(ellipse 120% 120% at 30% 20%, ' + BG_COLORS[ph.vihara] + ' 0%, #080F0A 100%)';
+
+  // Orb colours
+  var inner = document.getElementById('orb-inner');
+  inner.style.background = 'radial-gradient(circle, ' + vc.hex + ' 0%, ' + vc.dark + ' 60%, rgba(0,0,0,0.3) 100%)';
+  inner.style.boxShadow  = '0 0 60px rgba(' + rgb + ',0.35), 0 0 120px rgba(' + rgb + ',0.2)';
+
+  ['orb-r1','orb-r2','orb-r3'].forEach(function(id){
+    document.getElementById(id).style.borderColor = vc.hex;
+  });
+  document.getElementById('orb-sym').textContent  = ph.sym;
+  document.getElementById('orb-breath').style.borderColor = 'rgba(' + rgb + ',0.3)';
+  document.getElementById('pt-prog').style.stroke = vc.hex;
+
+  // Text
+  document.getElementById('pl-phrase').textContent  = ph.phrase;
+  document.getElementById('bg-action').textContent  = ph.action;
+  document.getElementById('bg-sub').textContent     = ph.sub;
+
+  // Timer
+  timerTotal = ph.mins * 60;
+  timerSecs  = timerTotal;
+  updateTimerDisplay();
+  curPhaseIdx = idx;
+}
+
+function togglePlay() {
+  if (timerRunning) {
+    stopTimers();
+    document.getElementById('pc-main-btn').textContent = '▶';
+    document.getElementById('orb-core').className = 'orb-core';
+  } else {
+    // Resume AudioContext on user gesture
+    try { getAudioCtx(); if (audioCtx.state === 'suspended') audioCtx.resume(); } catch(e){}
+    // Load voices now (Chrome lazy-loads them)
+    if (window.speechSynthesis) window.speechSynthesis.getVoices();
+    timerRunning = true;
+    document.getElementById('pc-main-btn').textContent = '\u23F8';
+    document.getElementById('orb-core').className = 'orb-core state-playing';
+    startBreathCycle();
+    startPhaseAudio(playerPhases[curPhaseIdx]);
+    timerIv = setInterval(function() {
+      if (timerSecs > 0) {
+        timerSecs--;
+        updateTimerDisplay();
+      } else {
+        endBell();
+        stopTimers();
+        if (curPhaseIdx < playerPhases.length - 1) {
+          setTimeout(nextPhase, 1800);
+        } else {
+          document.getElementById('pc-main-btn').textContent = '\u2713';
+          showToast('Session complete \uD83D\uDE4F');
+        }
+      }
+    }, 1000);
+  }
+}
+
+function startBreathCycle() {
+  if (breathTimeoutId) { clearTimeout(breathTimeoutId); breathTimeoutId = null; }
+  var cycles = [
+    {action:'Breathe in',    sub:'4 seconds', dur:4000},
+    {action:'Hold gently',   sub:'2 seconds', dur:2000},
+    {action:'Breathe out',   sub:'6 seconds', dur:6000},
+    {action:'Rest',          sub:'',          dur:2000}
+  ];
+  var ci = 0;
+  function tick() {
+    if (!timerRunning) return;
+    var c = cycles[ci % cycles.length];
+    document.getElementById('bg-action').textContent = c.action;
+    document.getElementById('bg-sub').textContent    = c.sub;
+    ci++;
+    breathTimeoutId = setTimeout(tick, c.dur);
+  }
+  tick();
+}
+
+function nextPhase() {
+  stopTimers();
+  document.getElementById('pc-main-btn').textContent = '▶';
+  document.getElementById('orb-core').className = 'orb-core';
+  if (curPhaseIdx < playerPhases.length - 1) {
+    loadPhase(curPhaseIdx + 1);
+  } else {
+    showToast('Session complete \uD83D\uDE4F');
+    setTimeout(closePlayer, 1500);
+  }
+}
+
+function prevPhase() {
+  stopTimers();
+  document.getElementById('pc-main-btn').textContent = '▶';
+  document.getElementById('orb-core').className = 'orb-core';
+  if (curPhaseIdx > 0) loadPhase(curPhaseIdx - 1);
+}
+
+function updateTimerDisplay() {
+  var m   = Math.floor(timerSecs / 60);
+  var s   = timerSecs % 60;
+  var ph  = playerPhases[curPhaseIdx];
+  document.getElementById('pt-time').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  document.getElementById('pt-lbl').textContent  = ph ? ph.label.toUpperCase() : '';
+  var pct = timerTotal > 0 ? timerSecs / timerTotal : 0;
+  document.getElementById('pt-prog').style.strokeDashoffset = 239 * (1 - pct);
+}
+
+// ════════════════════════════════════════
+// TRACKER
+// ════════════════════════════════════════
+var MSGS = ['','One abode kindled.','Two abodes cultivated.','Three \u2014 beautifully done.','All four Brahma Viharas practiced today \uD83D\uDE4F'];
+
+function toggleTT(v) {
+  todayDone[v] = !todayDone[v];
+  var rgb  = RGB[v];
+  var tile = document.getElementById('tt-'+v);
+  var ck   = document.getElementById('ttc-'+v);
+  if (!tile || !ck) return;
+  tile.style.background   = todayDone[v] ? 'rgba('+rgb+',0.12)' : '';
+  tile.style.borderColor  = todayDone[v] ? 'rgba('+rgb+',0.55)' : 'rgba('+rgb+',0.2)';
+  ck.textContent = todayDone[v] ? '\u2713' : '\u25CB';
+  var count = Object.keys(todayDone).filter(function(k){ return todayDone[k]; }).length;
+  var msgEl = document.getElementById('tt-msg');
+  if (msgEl) msgEl.textContent = MSGS[count] || '';
+}
+
+// ════════════════════════════════════════
+// REFLECTION / STREAK
+// ════════════════════════════════════════
+function saveRefl() {
+  streak++;
+  document.getElementById('sc-num').textContent       = streak;
+  document.getElementById('streak-disp').textContent  = streak + ' day' + (streak === 1 ? '' : 's');
+  buildWeekDots();
+  var btn = document.querySelector('.save-refl');
+  btn.textContent       = 'Saved \u2713';
+  btn.style.background  = '#6090E0';
+  showToast('Reflection saved. May your practice deepen \uD83D\uDE4F');
+  setTimeout(function(){ btn.textContent = "Save today's reflection"; btn.style.background = '#4CAF80'; }, 2500);
+}
+
+// ════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════
+var toastTimeout;
+function showToast(msg) {
+  var el = document.getElementById('toast');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(function(){ el.classList.remove('show'); }, 3000);
+}
+
+// ════════════════════════════════════════
+// WEEK DOTS
+// ════════════════════════════════════════
+function buildWeekDots() {
+  var el = document.getElementById('sc-wk');
+  if (!el) return;
+  var days  = ['M','T','W','T','F','S','S'];
+  var today = (new Date().getDay() + 6) % 7;
+  el.innerHTML = days.map(function(d,i){
+    return '<div class="sc-day"><span class="sc-dlbl">'+d+'</span><div class="sc-dpip'+(i<=today?' on':'')+'"></div></div>';
+  }).join('');
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+buildWeekDots();
+</script>
+</body>
+</html>

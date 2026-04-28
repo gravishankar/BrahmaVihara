@@ -1505,13 +1505,9 @@ var guidedSegIdx = 0;
 var guidedTimeout= null;
 var speakTimeout = null;
 
-// Probe whether MP3s are available (set to true after generate)
-var mp3Available = false;
-(function() {
-  var t = new Audio(AUDIO_PATH + 'settle_01.mp3');
-  t.addEventListener('canplaythrough', function(){ mp3Available = true; }, {once:true});
-  t.load();
-})();
+// Assume MP3s are available (files are in audio/ directory)
+// If playback fails, will gracefully fall back to Web Speech on error
+var mp3Available = true;
 
 function getAudioCtx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();

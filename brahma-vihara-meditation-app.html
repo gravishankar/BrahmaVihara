@@ -1543,17 +1543,26 @@ function stopCurrentAudio() {
 function playMP3(filename, onEnd) {
   stopCurrentAudio();
   var url = AUDIO_PATH + filename;
+  var textFromFilename = filename.replace(/\.mp3$/, '').replace(/_/g, ' ');
+
   var audio = new Audio(url);
   audio.volume = 0.92;
   audio.crossOrigin = 'anonymous';
-  currentAudio = audio;
-  audio.addEventListener('canplay', function(){ console.log('MP3 playing: ' + filename); });
-  audio.addEventListener('ended', function(){ currentAudio = null; if (onEnd) onEnd(); });
+
+  var audioStarted = false;
+
+  audio.addEventListener('playing', function(){
+    audioStarted = true;
+    console.log('MP3 playing: ' + filename);
+  });
+  audio.addEventListener('ended', function(){
+    currentAudio = null;
+    if (onEnd) onEnd();
+  });
   audio.addEventListener('error', function(e){
     console.error('Audio error for ' + filename + ':', e.target.error);
-    // Try fallback to Web Speech
     currentAudio = null;
-    speakFallback(filename.replace(/\.mp3$/, '').replace(/_/g, ' '), onEnd);
+    speakFallback(textFromFilename, onEnd);
   });
 
   // Try to play with fallback to Web Speech on autoplay policy error
@@ -1561,19 +1570,21 @@ function playMP3(filename, onEnd) {
   if (playPromise !== undefined) {
     playPromise.then(function(){
       console.log('MP3 playback started: ' + filename);
+      currentAudio = audio;
     }).catch(function(e){
       console.error('Play error for ' + filename + ':', e.message);
       if (e.name === 'NotAllowedError') {
         console.warn('Autoplay blocked by browser, falling back to Web Speech');
         currentAudio = null;
-        // Fall back to Web Speech Synthesis
-        var textFromFilename = filename.replace(/\.mp3$/, '').replace(/_/g, ' ');
         speakFallback(textFromFilename, onEnd);
       } else {
         currentAudio = null;
         if (onEnd) onEnd();
       }
     });
+  } else {
+    // For older browsers
+    currentAudio = audio;
   }
 }
 
